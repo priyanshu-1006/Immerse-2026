@@ -67,55 +67,64 @@ const CountdownTimer = ({ variant = 'full' }) => {
   return (
     <div className="text-center">
       {/* Status Label */}
-      <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-[#ff6622]/30 bg-[#ff6622]/10 rounded-full">
+      <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 border border-[#ff6622]/30 bg-[#ff6622]/5">
         <div className="w-2 h-2 rounded-full bg-[#ff6622] animate-pulse" />
-        <span className="font-mono text-xs text-[#ff6622] tracking-[0.2em]">COUNTDOWN ACTIVE</span>
+        <span className="font-mono text-[10px] sm:text-xs text-[#ff6622] tracking-[0.15em] sm:tracking-[0.2em]">COUNTDOWN ACTIVE</span>
       </div>
 
-      {/* Timer Grid */}
-      <div className="flex items-center justify-center gap-4 lg:gap-6 mb-6">
+      {/* Timer Grid - Bold Design */}
+      <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4 mb-4">
         {timeUnits.map((unit, i) => (
           <React.Fragment key={unit.label}>
             <div className="relative group">
-              {/* Glow Background */}
+              {/* Number Box - HUD Style */}
               <div 
-                className="absolute inset-0 opacity-20 blur-xl transition-opacity group-hover:opacity-40"
-                style={{ background: unit.color }}
-              />
-              
-              {/* Number Box */}
-              <div className="relative bg-[#0B0B0D]/90 border border-white/10 backdrop-blur-sm p-4 lg:p-6 min-w-[70px] lg:min-w-[100px]">
+                className="relative bg-[#0a0a0c]/95 border-2 backdrop-blur-sm p-3 sm:p-4 lg:p-6 min-w-[60px] sm:min-w-[80px] lg:min-w-[100px]"
+                style={{ borderColor: `${unit.color}40` }}
+              >
+                {/* Glow Effect */}
                 <div 
-                  className="font-heading text-3xl lg:text-5xl xl:text-6xl tabular-nums transition-all"
+                  className="absolute inset-0 opacity-30 blur-xl pointer-events-none"
+                  style={{ background: `radial-gradient(circle at center, ${unit.color}40, transparent 70%)` }}
+                />
+                
+                <div 
+                  className="relative font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl tabular-nums"
                   style={{ 
                     color: unit.color,
-                    textShadow: `0 0 30px ${unit.color}50`
+                    textShadow: `0 0 30px ${unit.color}60, 0 0 60px ${unit.color}30`
                   }}
                 >
                   {String(unit.value).padStart(2, '0')}
                 </div>
-                <div className="font-mono text-[8px] lg:text-[10px] text-white/40 tracking-[0.3em] mt-2">
+                <div className="font-mono text-[8px] sm:text-[9px] lg:text-[10px] text-white/40 tracking-[0.2em] mt-2">
                   {unit.label}
                 </div>
                 
                 {/* Corner Decorations */}
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l" style={{ borderColor: `${unit.color}40` }} />
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r" style={{ borderColor: `${unit.color}40` }} />
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l" style={{ borderColor: `${unit.color}40` }} />
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r" style={{ borderColor: `${unit.color}40` }} />
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l" style={{ borderColor: unit.color }} />
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r" style={{ borderColor: unit.color }} />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l" style={{ borderColor: unit.color }} />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r" style={{ borderColor: unit.color }} />
+                
+                {/* Top Center Tick Mark */}
+                <div 
+                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-1"
+                  style={{ background: `linear-gradient(to right, transparent, ${unit.color}60, transparent)` }}
+                />
               </div>
             </div>
             
             {/* Separator */}
             {i < timeUnits.length - 1 && (
-              <div className="text-2xl lg:text-4xl text-white/20 font-light animate-pulse">:</div>
+              <div className="text-xl sm:text-2xl lg:text-3xl text-white/20 font-light animate-pulse">:</div>
             )}
           </React.Fragment>
         ))}
       </div>
 
       {/* Mission Status */}
-      <div className="font-mono text-xs text-[#00808a] tracking-widest">
+      <div className="font-mono text-[10px] sm:text-xs text-[#00808a] tracking-widest">
         MISSION STATUS: <span className="text-[#ffaa00]">PREPARATION PHASE</span>
       </div>
     </div>

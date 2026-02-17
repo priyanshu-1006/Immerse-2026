@@ -211,61 +211,141 @@ function SponsorCard({ sponsor }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   MAIN HOME PAGE - With Proper Padding & Spacing
+   MAIN HOME PAGE - Bold Hero Design
 ═══════════════════════════════════════════════════════════════════ */
 const Home = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <InterstellarBackground />
       
+      {/* Section Navigation Dots - Right Side */}
+      <div className="fixed right-6 lg:right-10 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3">
+        {[1, 2, 3, 4, 5].map((_, i) => (
+          <div 
+            key={i} 
+            className={`w-2 h-2 rounded-full border transition-all duration-300 cursor-pointer hover:border-[#00f0ff] hover:bg-[#00f0ff]/20 ${
+              i === 0 ? 'border-[#00f0ff] bg-[#00f0ff]' : 'border-white/20'
+            }`}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10">
         
         {/* ═════════════════════════════════════════════════════════════
-            HERO SECTION
+            HERO SECTION - Bold Design
         ═════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-20 xl:px-32 text-center pt-20">
+        <section className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-20 xl:px-32 text-center">
           
-          <div className="flex items-center gap-4 mb-10">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#00ff88] shadow-[0_0_15px_#00ff88,0_0_30px_#00ff8880] animate-pulse" />
-              <span className="font-mono text-xs text-[#00ff88] tracking-[0.4em] uppercase">Online</span>
+          {/* HUD Frame Container */}
+          <div className="relative w-full max-w-5xl mx-auto p-8 sm:p-12 lg:p-16">
+            
+            {/* Corner Decorations */}
+            <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#00f0ff]/40" />
+            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#00f0ff]/40" />
+            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#00f0ff]/40" />
+            <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#00f0ff]/40" />
+            
+            {/* Status Indicator */}
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-2 h-2 rounded-full bg-[#00ff88] shadow-[0_0_10px_#00ff88,0_0_20px_#00ff8880] animate-pulse" />
+              <span className="font-mono text-xs sm:text-sm text-[#00ff88] tracking-[0.3em] uppercase">
+                SYSTEMS ONLINE // IMMERSE 2026
+              </span>
             </div>
-            <div className="w-px h-4 bg-white/20" />
-            <span className="font-mono text-xs text-white/30 tracking-[0.3em]">MARCH 2026</span>
-          </div>
-
-          <div className="relative mb-8">
-            <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl xl:text-9xl leading-[0.85] tracking-tight">
-              <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40">IMMERSE</span>
-            </h1>
-            <div className="font-heading text-2xl sm:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#7f00ff] tracking-[0.5em] mt-4">2026</div>
-          </div>
-
-          <p className="font-mono text-sm sm:text-base text-white/30 tracking-[0.15em] max-w-xl mb-12 leading-relaxed">
-            BEYOND THE EVENT HORIZON<br />
-            <span className="text-white/50">Where technology meets the infinite cosmos</span>
-          </p>
-
-          <div className="mb-14">
-            <CountdownTimer variant="compact" />
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-5">
-            <Link to="/events" className="group relative px-10 py-4 overflow-hidden no-underline">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00f0ff]/20 to-[#7f00ff]/20 border border-[#00f0ff]/40 group-hover:from-[#00f0ff]/30 group-hover:to-[#7f00ff]/30 group-hover:border-[#00f0ff]/60 transition-all duration-500" />
-              <span className="relative font-heading text-sm text-[#00f0ff] tracking-[0.3em]">EXPLORE MISSIONS</span>
-            </Link>
-            <Link to="/about" className="px-8 py-4 border border-white/10 text-white/40 font-heading text-sm tracking-[0.2em] hover:border-white/30 hover:text-white/70 transition-all duration-500 no-underline">
-              LEARN MORE
-            </Link>
-          </div>
-
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center gap-3">
-              <span className="font-mono text-[10px] text-white/20 tracking-[0.3em]">SCROLL</span>
-              <div className="w-px h-10 bg-gradient-to-b from-white/20 to-transparent" />
+            
+            {/* Subtext */}
+            <div className="font-mono text-[10px] sm:text-xs text-white/30 tracking-[0.4em] mb-10">
+              NATIONAL TECH FEST // GDG MMMUT
             </div>
+            
+            {/* Main Title - IMMERSE */}
+            <div className="relative mb-2">
+              <h1 
+                className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] leading-[0.85] tracking-[0.05em]"
+                style={{
+                  background: 'linear-gradient(180deg, #00f0ff 0%, #00a8b0 50%, #007080 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  textShadow: '0 0 80px rgba(0, 240, 255, 0.3)',
+                  filter: 'drop-shadow(0 0 40px rgba(0, 240, 255, 0.2))'
+                }}
+              >
+                IMMERSE
+              </h1>
+            </div>
+            
+            {/* Year - 2026 */}
+            <div 
+              className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-[0.15em] mb-10"
+              style={{
+                background: 'linear-gradient(180deg, #bf00ff 0%, #7f00ff 50%, #5000a0 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 60px rgba(127, 0, 255, 0.3)',
+                filter: 'drop-shadow(0 0 30px rgba(127, 0, 255, 0.2))'
+              }}
+            >
+              2026
+            </div>
+            
+            {/* Description */}
+            <p className="text-white/50 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+              A platform for innovation, intelligence, and transformation.
+            </p>
+            <p className="text-white/30 text-sm sm:text-base lg:text-lg max-w-xl mx-auto mb-12">
+              Experience the future at MMMUT Gorakhpur.
+            </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-16">
+              <Link 
+                to="/events" 
+                className="group relative px-10 sm:px-14 py-4 sm:py-5 overflow-hidden no-underline border-2 border-[#00f0ff]/60 bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 hover:border-[#00f0ff] transition-all duration-500"
+              >
+                <span className="relative font-heading text-sm sm:text-base text-[#00f0ff] tracking-[0.2em]">
+                  EXPLORE MISSIONS
+                </span>
+              </Link>
+              <Link 
+                to="/events/stellar-genesis" 
+                className="group relative px-10 sm:px-14 py-4 sm:py-5 overflow-hidden no-underline border-2 border-[#7f00ff]/60 bg-[#7f00ff]/10 hover:bg-[#7f00ff]/20 hover:border-[#7f00ff] transition-all duration-500"
+              >
+                <span className="relative font-heading text-sm sm:text-base text-[#bf00ff] tracking-[0.2em]">
+                  HACKATHON BRIEFING
+                </span>
+              </Link>
+            </div>
+            
+            {/* Stats Row */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16">
+              {[
+                { value: '7', label: 'CORE SECTORS', color: '#00f0ff' },
+                { value: '24H', label: 'HACKATHON', color: '#00f0ff' },
+                { value: '500+', label: 'INNOVATORS', color: '#00ff88' },
+                { value: '₹1L+', label: 'PRIZE POOL', color: '#ffaa00' },
+              ].map((stat, i) => (
+                <div key={i} className="text-center py-4">
+                  <div 
+                    className="font-heading text-3xl sm:text-4xl lg:text-5xl mb-2"
+                    style={{ color: stat.color }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="font-mono text-[9px] sm:text-[10px] text-white/40 tracking-[0.2em]">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
+          
+          {/* Countdown Timer - Full Version */}
+          <div className="w-full max-w-4xl mx-auto px-4">
+            <CountdownTimer />
+          </div>
+
         </section>
 
         {/* ═════════════════════════════════════════════════════════════
