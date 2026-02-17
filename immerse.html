@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMMERSE 2026 | INTERSTELLAR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D9FF;
+            --secondary: #FF006E;
+            --accent: #FFD600;
+            --dark: #0A0E27;
+            --darker: #050814;
+            --light: #E0F7FF;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Animated starfield background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .theme-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00D9FF 0%, #FF006E 50%, #FFD600 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(0, 217, 255, 0.5);
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: rgba(224, 247, 255, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out 0.8s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-out 1s backwards;
+            letter-spacing: 2px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Floating elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border: 2px solid var(--primary);
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape.circle {
+            border-radius: 50%;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 1s;
+            border-color: var(--secondary);
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 2s;
+            border-color: var(--accent);
+        }
+
+        /* Events Section */
+        .events {
+            position: relative;
+            z-index: 10;
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--primary), var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(255, 0, 110, 0.05));
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+            border-color: var(--primary);
+        }
+
+        .event-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .event-card .subtitle {
+            font-size: 1rem;
+            color: rgba(224, 247, 255, 0.6);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .event-card p {
+            line-height: 1.8;
+            color: rgba(224, 247, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(224, 247, 255, 0.8);
+        }
+
+        .detail-item::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: gap 0.3s;
+        }
+
+        .learn-more:hover {
+            gap: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            color: rgba(224, 247, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .events {
+                padding: 4rem 2rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">IMMERSE 2026</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#register">Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-shapes">
+            <div class="shape circle"></div>
+            <div class="shape"></div>
+            <div class="shape circle"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="theme-label">THEME: INTERSTELLAR 🚀</div>
+            <h1>IMMERSE 2026</h1>
+            <h2>INTERSTELLAR</h2>
+            <p class="tagline">Innovation Beyond Space & Time</p>
+            <a href="#events" class="cta-button">EXPLORE EVENTS</a>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <h2 class="section-title">MISSION EVENTS</h2>
+        
+        <div class="events-grid">
+            <!-- Event 1: Stellar Genesis -->
+            <div class="event-card reveal">
+                <div class="event-icon">🔥</div>
+                <h3>Stellar Genesis</h3>
+                <p class="subtitle">Flagship Hackathon</p>
+                <p>The premier innovation challenge designed to push participants beyond conventional thinking and inspire impactful technology-driven solutions.</p>
+                <div class="event-details">
+                    <div class="detail-item">Team Size: 2-4 members</div>
+                    <div class="detail-item">Focus: AI, Web/App, Smart Systems</div>
+                    <div class="detail-item">Build functional prototypes</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+
+            <!-- Event 2: Cosmic Intelligence -->
+            <div class="event-card reveal">
+                <div class="event-icon">🧠</div>
+                <h3>Cosmic Intelligence</h3>
+                <p class="subtitle">AI Challenge</p>
+                <p>Explore the boundaries of machine intelligence, creativity, and problem-solving through AI-driven tasks and prompt engineering.</p>
+                <div class="event-details">
+                    <div class="detail-item">Individual/Team based</div>
+                    <div class="detail-item">Prompt Engineering & AI Reasoning</div>
+                    <div class="detail-item">Creative AI workflows</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+
+            <!-- Event 3: Quantum Logic -->
+            <div class="event-card reveal">
+                <div class="event-icon">⚡</div>
+                <h3>Quantum Logic</h3>
+                <p class="subtitle">Competitive Programming</p>
+                <p>Elite algorithmic battle for strong logical reasoning. Solve complex DSA problems under time constraints.</p>
+                <div class="event-details">
+                    <div class="detail-item">Individual competition</div>
+                    <div class="detail-item">Data Structures & Algorithms</div>
+                    <div class="detail-item">Time-optimized solutions</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+
+            <!-- Event 4: Mission Control -->
+            <div class="event-card reveal">
+                <div class="event-icon">🛠</div>
+                <h3>Mission Control</h3>
+                <p class="subtitle">Technical Workshop</p>
+                <p>Hands-on experiential learning focused on emerging technologies and modern development paradigms.</p>
+                <div class="event-details">
+                    <div class="detail-item">AI & Intelligent Systems</div>
+                    <div class="detail-item">Full Stack Development</div>
+                    <div class="detail-item">Certification included</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+
+            <!-- Event 5: Orbit Shift -->
+            <div class="event-card reveal">
+                <div class="event-icon">🚀</div>
+                <h3>Orbit Shift</h3>
+                <p class="subtitle">Startup Ideathon</p>
+                <p>Entrepreneurship-driven innovation challenge to design technology-based startup ideas with real-world impact.</p>
+                <div class="event-details">
+                    <div class="detail-item">Team/Individual based</div>
+                    <div class="detail-item">Business model design</div>
+                    <div class="detail-item">Pitch to judges</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+
+            <!-- Event 6: Synthetic Cosmos -->
+            <div class="event-card reveal">
+                <div class="event-icon">✨</div>
+                <h3>Synthetic Cosmos</h3>
+                <p class="subtitle">Creative AI Challenge</p>
+                <p>Blend creativity with technology using Generative AI for visual storytelling and artistic innovation.</p>
+                <div class="event-details">
+                    <div class="detail-item">AI Image Generation</div>
+                    <div class="detail-item">Visual storytelling focus</div>
+                    <div class="detail-item">Creative transformation</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+
+            <!-- Event 7: Event Horizon -->
+            <div class="event-card reveal">
+                <div class="event-icon">🔓</div>
+                <h3>Event Horizon</h3>
+                <p class="subtitle">Cybersecurity Challenge</p>
+                <p>Immersive challenge combining logic puzzles, cyber concepts, and escape-room dynamics under pressure.</p>
+                <div class="event-details">
+                    <div class="detail-item">Team-based competition</div>
+                    <div class="detail-item">Encryption & logic puzzles</div>
+                    <div class="detail-item">System analysis tasks</div>
+                </div>
+                <a href="#" class="learn-more">Learn More →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>IMMERSE 2026 | Innovation Beyond Space & Time | Contact: info@immerse2026.tech</p>
+    </footer>
+
+    <script>
+        // Generate starfield
+        const starfield = document.getElementById('starfield');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starfield.appendChild(star);
+        }
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
